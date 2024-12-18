@@ -12,6 +12,8 @@
   "license": "ISC",
   "description": "A Node.js client to call a GraphQL API",
   "dependencies": {
-    "node-fetch": "^3.3.2"
+    "graphql-ws": "^5.16.0",
+    "node-fetch": "^3.3.2",
+    "ws": "^8.18.0"
   }
 }

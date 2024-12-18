@@ -30,3 +30,16 @@ On running `graphqlClient.js`, Following oputput can be seen in the console.
 data returned: { data: { updateUser: { id: '1', name: 'aa1' } } }
 ```
 The updated name can be checked in the db too.
+
+Note: the graphql service is only accessible at POST /graphql endpoint with no @RestController needed in the springboot app server. Also, all updates are by Mutation type and all fetch are by Query type. The POST payload from client should contain query and mutation schema.
+Additionally, subscription is accessible at POST /subscriptions endpoint by default with payload from client should contain subscription schema.
+
+Testing subscription
+- From mac:
+```bash
+  (echo '{"id":"1", "type":"start", "payload":{"query":"subscription userUpdated($id: ID!) { userUpdated(id: $id) { id name email } }","variables":{"id":"1"}}}') | websocat ws://localhost:8080/subscriptions
+```
+- From nodejs client:
+```bash
+  node graphqlClientSubscription
+```

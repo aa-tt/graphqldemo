@@ -15,6 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/h2-console/**").permitAll()  // Allow access to H2 console
             .antMatchers("/actuator/**").permitAll()  // Allow access to actuator
             .antMatchers("/graphql").permitAll()  // Allow access to GraphQL endpoint
+            .antMatchers("/subscriptions").permitAll()  // Allow access to GraphQL subscriptions defined by WebSocketConfig
             .anyRequest().authenticated()
             .and()
             .csrf().disable()  // Disable CSRF protection for H2 console

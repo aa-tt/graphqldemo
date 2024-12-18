@@ -13,6 +13,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserSubscriptionService userSubscriptionService;
+
     @Transactional
     public User updateUser(Long id, User updates) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
@@ -22,7 +25,9 @@ public class UserService {
         if (updates.getEmail() != null) {
             user.setEmail(updates.getEmail());
         }
-        return userRepository.save(user);
+        userRepository.save(user);
+        userSubscriptionService.publishUserUpdate(user);
+        return user;
     }
 
     public User getUserById(Long id) {
